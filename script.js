@@ -60,6 +60,8 @@ function applyGravity() {
   // Add rotation: tilt up when rising, down when falling
   let angle = Math.min(Math.max(bird_dy * 2, -30), 90); // Clamp between -30 and 90 degrees
   bird.style.transform = `rotate(${angle}deg)`;
+
+
 }
 
 // session 2
@@ -69,8 +71,8 @@ function startGame() {
   // session 4
   backgroundMusic.play();
   //session 4
-  highScore = localStorage.getItem("flappyHighScore") || 0;
-  score_display.textContent = "Score: " + score + " | Best: " highScore
+ let  highScore = localStorage.getItem("flappyHighScore") || 0;
+  score_display.textContent = "Score: " + score + " | Best:  highScore";
 
   gameInterval = setInterval(() => {
     // session 2
@@ -177,6 +179,12 @@ function checkCollision() {
 // session 3
 // End game
 function endGame() {
+  // session 4
+  if (Number(score) > Number(highScore)) {
+    localStorage.setItem("flappyHighScore", score);
+  }
+  hitSound.play();
+
   clearInterval(gameInterval);
   gameInterval = null;
 
@@ -229,7 +237,20 @@ const scoreSound = new Audio("sounds/score.mp3");
 const hitSound = new Audio("sounds/hit.mp3");
 
 // Load background music
-const backgroundMusic = new Audio(sounds/background.mp3);
+const backgroundMusic = new Audio("sounds/background.mp3");
 backgroundMusic.loop = true; // music should keep playing
 backgroundMusic.volume = 0.5; // adjust volume
-backgroundMusic.play();
+// backgroundMusic.play();
+
+const muteBtn = document.getElementById("mute-btn");
+
+muteBtn.addEventListener("click", () => {
+  if (musicMuted) {
+    backgroundMusic.play();
+    muteBtn.textContent = "Mute Music";
+  } else {
+    backgroundMusic.pause();
+    muteBtn.textContent = "Play Music";
+  }
+  musicMuted = !musicMuted;
+})
