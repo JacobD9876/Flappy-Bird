@@ -28,7 +28,6 @@ function setScore(newScore) {
     scoreSound.play(); // play only when actually scoring
   }
   score = newScore;
-  score_display.textContent = "Score: " + score + " | Best: " + highScore;
 }
 
 // session 2
@@ -64,6 +63,9 @@ function applyGravity() {
 
 }
 
+let  highScore = localStorage.getItem("flappyHighScore") || 0;
+
+
 // session 2
 function startGame() {
   if (gameInterval !== null) return; // Prevent multiple intervals
@@ -71,8 +73,6 @@ function startGame() {
   // session 4
   backgroundMusic.play();
   //session 4
- let  highScore = localStorage.getItem("flappyHighScore") || 0;
-  score_display.textContent = "Score: " + score + " | Best:  highScore";
 
   gameInterval = setInterval(() => {
     // session 2
@@ -85,6 +85,9 @@ function startGame() {
     frame++;
 
     getDifficultySettings();
+    highScore = localStorage.getItem("flappyHighScore") || 0;
+    score_display.textContent = "Score: " + score + " | Best: " + highScore;
+
 
     // session 3
     // Every 200 frames (~2 seconds), create new pipe
@@ -204,7 +207,7 @@ function resetGame() {
   setScore(0);
   frame = 0;
   game_state = "Start";
-  score_display.textContent = "";
+  // score_display.textContent = "";
 }
 
 // session 2
