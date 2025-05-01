@@ -24,8 +24,11 @@ let start_btn = document.getElementById("start-btn");
 
 // session 3
 function setScore(newScore) {
+  if (newScore > score) {
+    scoreSound.play(); // play only when actually scoring
+  }
   score = newScore;
-  score_display.textContent = "Score: " + score;
+  score_display.textContent = "Score: " + score + " | Best: " + highScore;
 }
 
 // session 2
@@ -35,6 +38,10 @@ document.addEventListener("keydown", (e) => {
       game_state = "Play";
       startGame();
     }
+
+    // Session 4
+    flapSound.play(); // Play flap sound
+
     bird_dy = -7;
   }
 });
@@ -48,11 +55,22 @@ function applyGravity() {
   birdTop = Math.min(birdTop, game_container.offsetHeight - bird.offsetHeight);
 
   bird.style.top = birdTop + "px";
+
+  //session 4
+  // Add rotation: tilt up when rising, down when falling
+  let angle = Math.min(Math.max(bird_dy * 2, -30), 90); // Clamp between -30 and 90 degrees
+  bird.style.transform = `rotate(${angle}deg)`;
 }
 
 // session 2
 function startGame() {
   if (gameInterval !== null) return; // Prevent multiple intervals
+
+  // session 4
+  backgroundMusic.play();
+  //session 4
+  highScore = localStorage.getItem("flappyHighScore") || 0;
+  score_display.textContent = "Score: " + score + " | Best: " highScore
 
   gameInterval = setInterval(() => {
     // session 2
@@ -63,6 +81,8 @@ function startGame() {
     checkCollision();
     // session 3
     frame++;
+
+    getDifficultySettings();
 
     // session 3
     // Every 200 frames (~2 seconds), create new pipe
@@ -187,3 +207,29 @@ start_btn.addEventListener("click", () => {
     startGame();
   }
 });
+
+// session 4
+let pipeSpeed = 3; // Default speed
+
+function getDifficultySettings() {
+  const selected = document.getElementById("difficulty-select").value;
+
+  if (selected === "easy") {
+    pipeSpeed = 2;
+  } else if (selected === "medium") {
+    pipeSpeed = 3;
+  } else if (selected === "hard") {
+    pipeSpeed = 5;
+  }
+}
+
+// Load sound effects
+const flapSound = new Audio("sounds/flap.mp3");
+const scoreSound = new Audio("sounds/score.mp3");
+const hitSound = new Audio("sounds/hit.mp3");
+
+// Load background music
+const backgroundMusic = new Audio(sounds/background.mp3);
+backgroundMusic.loop = true; // music should keep playing
+backgroundMusic.volume = 0.5; // adjust volume
+backgroundMusic.play();

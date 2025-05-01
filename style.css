@@ -4,9 +4,9 @@ body {
   background-color: #70c5ce;
   font-family: sans-serif;
   overflow: hidden;
-    font-family: "Cal Sans", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Cal Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .button {
@@ -20,7 +20,7 @@ body {
   width: 100%;
   height: 100vh;
   margin: 0;
-  background: url("assets/background.png") no-repeat center center;
+  background: url("assets/background.jpg") no-repeat center center;
   background-size: cover;
 }
 
@@ -31,8 +31,12 @@ body {
   z-index: 1;
   top: 50%;
   left: 40%;
-  background: url("assets/bird.png") no-repeat center center;
+  background: url("assets/bird.jpg") no-repeat center center;
   background-size: cover;
+
+  /* session 4 : New for rotation*/
+  transform-origin: center;
+  transition: transforme 0.1s linear;
 }
 
 #start-btn {
@@ -41,7 +45,7 @@ body {
   right: 20px;
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #28a745;
+  background-color: #e3e63a;
 }
 
 #score {
@@ -55,21 +59,32 @@ body {
 
 /* session2 */
 #start-btn:hover {
-  background-color: #218838;
+  background-color: #e3e63a;
 }
 
 /* session3 */
 .pipe {
   position: absolute;
   width: 60px;
-  background-color: green;
+  background-color: yellow;
 }
 
 .top-pipe {
   top: 0;
-  border-bottom: 5px solid darkgreen;
+  border-bottom: 5px solid yellow;
 }
 
 .bottom pipe {
-  border-top: 5px solid darkgreen;
+  border-top: 5px solid yellow;
+}
+
+/* session 4 */
+
+#difficulty-select {
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 5px;
 }
