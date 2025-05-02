@@ -263,7 +263,7 @@ muteBtn.addEventListener("click", () => {
 
 
 function updateBirdAvatar(score) {
-  if (score >= 2 && score < 20) {
+  if (score >= 10 && score < 20) {
     bird.style.background = "url('./assets/bird_level2png.png') no-repeat center center";
     bird.style.backgroundSize = "cover";
   } else if (score >= 20) {
