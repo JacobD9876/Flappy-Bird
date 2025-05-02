@@ -257,3 +257,14 @@ muteBtn.addEventListener("click", () => {
   }
   musicMuted = !musicMuted;
 })
+
+
+function updateBirdAvatar(score) {
+  if (score >= 10 && score < 20) {
+    bird.src = "assets/bird_level2png.png";
+  } else if (score >= 20) {
+    bird.src = "assets/bird_level3.png";
+  } else {
+    bird.style.background = "url(/assets/bird.png) center center";
+  }
+}
