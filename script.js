@@ -85,6 +85,9 @@ function startGame() {
     frame++;
 
     getDifficultySettings();
+
+    updateBirdAvatar(score);
+
     highScore = localStorage.getItem("flappyHighScore") || 0;
     score_display.textContent = "Score: " + score + " | Best: " + highScore;
 
@@ -128,7 +131,7 @@ function createPipe() {
 // Move pipes
 function movePipes() {
   for (let pipe of pipes) {
-    pipe.style.left = pipe.offsetLeft - 3 + "px";
+    pipe.style.left = pipe.offsetLeft - pipeSpeed + "px";
 
     // Remove pipes off screen
     if (pipe.offsetLeft < -pipe.offsetWidth) {
@@ -260,12 +263,15 @@ muteBtn.addEventListener("click", () => {
 
 
 function updateBirdAvatar(score) {
-  if (score >= 10 && score < 20) {
-    bird.src = "assets/bird_level2png.png";
+  if (score >= 2 && score < 20) {
+    bird.style.background = "url('./assets/bird_level2png.png') no-repeat center center";
+    bird.style.backgroundSize = "cover";
   } else if (score >= 20) {
-    bird.src = "assets/bird_level3.png";
+    bird.style.background = "url('./assets/bird_level3.png') no-repeat center center";
+    bird.style.backgroundSize = "cover";
   } else {
-    bird.style.background = "url(/assets/bird.png) center center";
+    bird.style.background = "url('./assets/bird.jpg') no-repeat center center";
+    bird.style.backgroundSize = "cover";
   }
 }
 
