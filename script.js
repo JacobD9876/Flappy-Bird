@@ -268,3 +268,4 @@ function updateBirdAvatar(score) {
     bird.style.background = "url(/assets/bird.png) center center";
   }
 }
+
